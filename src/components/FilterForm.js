@@ -48,29 +48,35 @@ export default function FilterForm() {
     ]
 
     return (
-        <form action="">
-            <div className="row-auto">
-                <label htmlFor="name">Name: </label>
-                <input type="text" name="player-name" id="name"/>
-            </div>
-            <div className="row-auto">
-                <label htmlFor="province">Province: </label>
-                <input type="text" name="province" id="province"/>
-            </div>
-            <div className="row-auto">
-                <label htmlFor="city">City: </label>
-                <input type="text" name="city" id="city"/>
-            </div>
-            <div className="row-auto">
-                <label htmlFor="character">Character: </label>
-                <select name="character" id="character" defaultValue='--Select a character--'>
-                    <option value="%%">--Select a character--</option>
-                    {characters.map(character =>
-                        <option key={character.name} value={character.name}>{character.name}</option>
-                    )}
-                </select>
-            </div>
-            <button type="submit">Search</button>
-        </form>
+        <div className="block content-center justify-center self-center p-3 mx-auto my-3 w-full h-2">
+            <h1 className="m-4 font-bold">Enter details player</h1>
+            <form action="">
+                <div className="row-auto m-2">
+                    <label htmlFor="name">Name: </label>
+                    <input className='text-black' type="text" name="player-name" id="name" placeholder="JuanZ0"/>
+                </div>
+                <div className="row-auto m-2">
+                    <label htmlFor="province">Province: </label>
+                    <input className="text-black" type="text" name="province" id="province" placeholder="Saskatchewan"/>
+                </div>
+                <div className="row-auto m-2">
+                    <label htmlFor="city">City: </label>
+                    <input className="text-black" type="text" name="city" id="city" placeholder="Saskatoon" />
+                </div>
+                <div className="row-auto m-2">
+                    <label htmlFor="character">Character: </label>
+                    <select className="text-black" name="character" id="character"
+                            defaultValue="--Select a character--">
+                        <option value="%%">--Select a character--</option>
+                        {characters.map(character =>
+                            <option key={character.name} value={character.name}>{character.name}</option>
+                        )}
+                    </select>
+                </div>
+                <button className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
+                        type="submit">Search
+                </button>
+            </form>
+        </div>
     )
 }

@@ -1,10 +1,14 @@
 'use server'
+import * as MongoDBController from './mongodb'
+import * as StartggController from './startgg'
+import * as ChallongeController from './challonge'
 
 /**
  * This file will be used as a server handler which will be called on a filter
  * submission
- * @constructor
+ * @param req this is the request object that will be used in the filter creation
+ * @param res this is the response object that will be used in the filter creation
  */
-function POST(req, res) {
+export function POST(req, res) {
 
 }
