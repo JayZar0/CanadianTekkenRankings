@@ -1,3 +1,6 @@
+'use server'
+
+import {graphql, buildSchema} from 'graphql'
 /**
  * This file will be used to grab the information on a player using the start.gg api
  */
@@ -15,4 +18,16 @@
  *      name
  */
 async function queryPlayers() {
+    const queryResonse = await fetch('', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'Authorization': `bearer ${process.env.STARTGG_API_KEY}`
+        },
+        body: JSON.stringify({
+            "query": "...",
+            "variables": {  }
+        })
+    })
 }

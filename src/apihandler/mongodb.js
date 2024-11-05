@@ -19,8 +19,8 @@ export class Database {
      * This method will be used to update the information on the database
      */
     updateDatabase() {
-        // query the apis
-        // grab the data from the querys
+        // query the api
+        // grab the data from the query
         // map them
         // connect to the database
         // for each mapped piece of data
