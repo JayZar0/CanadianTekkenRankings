@@ -1,3 +1,5 @@
+import * as mongodb from 'mongodb'
+
 /**
  * This method will be used to update the database using the start.gg and challonge API data
  */
