@@ -26,7 +26,7 @@ async function queryPlayers() {
             'Authorization': `bearer ${process.env.STARTGG_API_KEY}`
         },
         body: JSON.stringify({
-            "query": "...",
+            "query": "",
             "variables": {  }
         })
     })

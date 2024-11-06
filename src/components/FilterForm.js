@@ -11,6 +11,8 @@ import * as React from 'react'
  * @constructor
  */
 export default function FilterForm() {
+    const [inputs, setInputs] = React.useState([])
+
     const characters = [
         {name: 'Alisa'},
         {name: 'Asuka'},
@@ -47,27 +49,43 @@ export default function FilterForm() {
         {name: 'Zafina'}
     ]
 
+    function setChange(e) {
+        const { name, value } = e.target
+
+        setInputs(prevState => ({
+            ...prevState,
+            [name]: value
+        }))
+    }
+
+    async function submitHandler() {
+
+    }
+
     return (
         <div className="block content-center justify-center self-center p-3 mx-auto my-3 w-full h-2">
             <h1 className="m-4 font-bold">Enter details player</h1>
-            <form action="">
+            <form action="" onSubmit={submitHandler}>
                 <div className="row-auto m-2">
                     <label htmlFor="name">Name: </label>
-                    <input className='text-black' type="text" name="player-name" id="name" placeholder="JuanZ0"/>
+                    <input className='text-black' type="text" name="player-name" id="name"
+                           placeholder="JuanZ0" onChange={setChange} />
                 </div>
                 <div className="row-auto m-2">
                     <label htmlFor="province">Province: </label>
-                    <input className="text-black" type="text" name="province" id="province" placeholder="Saskatchewan"/>
+                    <input className="text-black" type="text" name="province" id="province"
+                           placeholder="Saskatchewan" onChange={setChange} />
                 </div>
                 <div className="row-auto m-2">
                     <label htmlFor="city">City: </label>
-                    <input className="text-black" type="text" name="city" id="city" placeholder="Saskatoon" />
+                    <input className="text-black" type="text" name="city" id="city"
+                           placeholder="Saskatoon" onChange={setChange} />
                 </div>
                 <div className="row-auto m-2">
                     <label htmlFor="character">Character: </label>
                     <select className="text-black" name="character" id="character"
-                            defaultValue="--Select a character--">
-                        <option value="%%">--Select a character--</option>
+                            defaultValue="--Select a character--" onChange={setChange}>
+                        <option value="">--Select a character--</option>
                         {characters.map(character =>
                             <option key={character.name} value={character.name}>{character.name}</option>
                         )}
