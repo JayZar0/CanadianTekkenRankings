@@ -17,7 +17,7 @@ import {graphql, buildSchema} from 'graphql'
  *      placement
  *      name
  */
-async function queryPlayers() {
+export async function queryPlayers() {
     const queryResonse = await fetch('', {
         method: 'POST',
         headers: {

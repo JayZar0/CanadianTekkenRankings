@@ -1,6 +1,6 @@
 import * as React from 'react'
-import FilterForm from '@/components/FilterForm'
-import LeaderBoardList from '@/components/LeaderBoardList'
+import FilterForm from '@/app/components/FilterForm'
+import LeaderBoardList from '@/app/components/LeaderBoardList'
 import { Modal } from '@mui/material'
 
 export default function Home() {

@@ -1,0 +1,21 @@
+datasource db {
+  provider = "postgres"
+  url      = env("DATABASE_URL")
+}
+
+// This is the player model that will represent the player
+model Player {
+  id          String  @id @default(cuid())
+  startggid   String  @unique
+  gamertag    String
+  main        String
+  province    String
+  wins        Int
+  games       Int
+  averageRank Decimal
+  winRate     Decimal
+}
+
+model Tournament {
+  id Int @id @default(autoincrement())
+}
