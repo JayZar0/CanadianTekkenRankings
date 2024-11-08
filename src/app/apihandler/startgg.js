@@ -1,6 +1,8 @@
 'use server'
 
-import {graphql, buildSchema} from 'graphql'
+import { graphql, buildSchema } from 'graphql'
+import 'dotenv/config'
+
 /**
  * This file will be used to grab the information on a player using the start.gg api
  */
@@ -27,7 +29,9 @@ export async function queryPlayers() {
         },
         body: JSON.stringify({
             "query": "",
-            "variables": {  }
+            "variables": {
+
+            }
         })
     })
 }

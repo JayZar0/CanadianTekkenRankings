@@ -1,9 +1,9 @@
 import * as React from 'react'
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types'
 
 export default function LeaderBoardList(props) {
 
-    props.postgres = PropTypes.array;
+    props.data = PropTypes.array;
 
     return (
         <div>
@@ -16,11 +16,11 @@ export default function LeaderBoardList(props) {
                     </tr>
                 </thead>
                 <tbody>
-                    {props.postgres.map(data =>
-                        <tr key={data.id}>
-                            <td>{data.name}</td>
-                            <td>{data.averagePlacement}</td>
-                            <td>{data.winRate}</td>
+                    {props.data.map(d =>
+                        <tr key={d.id}>
+                            <td>{d.name}</td>
+                            <td>{d.averagePlacement}</td>
+                            <td>{d.winRate}</td>
                         </tr>
                     )}
                 </tbody>

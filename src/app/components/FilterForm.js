@@ -63,7 +63,7 @@ export default function FilterForm() {
     }
 
     return (
-        <div className="block content-center justify-center self-center p-3 mx-auto my-3 w-full h-2">
+        <div className="block content-center justify-center self-center p-3 mx-auto my-3 w-60 h-96 bg-red-500 rounded">
             <h1 className="m-4 font-bold">Enter details player</h1>
             <form action="" onSubmit={submitHandler}>
                 <div className="row-auto m-2">
