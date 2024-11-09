@@ -20,19 +20,23 @@ export class Database {
         await this.prisma.$connect()
     }
 
-    async test() {
-        const test = await this.prisma.Player.create({
-            data: {
-                startggid: 1313,
-                gamertag: 'juanZ0',
-                main: 'Xiaoyu',
-                province: 'Saskatchewan',
-                wins: 24,
-                games: 56,
-                averageRank: 10.7,
-                winRate: 42.9
-            }
-        })
+    async addData(playerData) {
+        try {
+            const test = await this.prisma.Player.create({
+                data: {
+                    startggid: '1313',
+                    gamertag: 'juanZ0',
+                    main: 'Xiaoyu',
+                    province: 'Saskatchewan',
+                    wins: 24,
+                    games: 56,
+                    averageRank: 10.7,
+                    winRate: 42.9
+                }
+            })
+        } catch(e) {
+            console.error('error: data did not get added')
+        }
     }
 
     /**

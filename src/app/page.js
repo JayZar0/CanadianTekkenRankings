@@ -10,6 +10,17 @@ export default function Home() {
     const handleOpen = () => setOpen(true)
     const handleClose = () => setOpen(false)
 
+    async function handleButton() {
+        const response = await fetch('/apihandler', {
+            method: 'POST'
+        })
+        if (!response.ok) {
+            console.error('data was not uploaded')
+        } else {
+            console.log(response.data)
+        }
+    }
+
     return (
         <div className='grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]'>
             <div className='flex flex-wrap'>
@@ -24,6 +35,7 @@ export default function Home() {
                     <h1 className='font-bold'>Canada Tekken 8 Leaderboard</h1>
                     {/*<LeaderBoardList data={} />*/}
                 </div>
+                <button onClick={handleButton}>Add Data</button>
             </div>
         </div>
     );
