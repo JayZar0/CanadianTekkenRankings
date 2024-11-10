@@ -20,6 +20,7 @@ export class Database {
         await this.prisma.$connect()
     }
 
+    // TODO find a way to get this to add to the postgres database
     async addData(playerData) {
         try {
             const test = await this.prisma.Player.create({

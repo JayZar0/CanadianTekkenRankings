@@ -1,10 +1,11 @@
 datasource db {
   provider = "postgres"
-  url      = env("POSTGRES_CONNECTION_STRING")
+  url      = env("POSTGRES_CONNECTION_WORK")
 }
 
 generator client {
   provider = "prisma-client-js"
+  output   = "./"
 }
 
 // This is the player model that will represent the player
