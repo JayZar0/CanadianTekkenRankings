@@ -7,15 +7,17 @@ import { Modal } from '@mui/material'
 
 export default function Home() {
     const [open, setOpen] = React.useState(false)
+    const [error, setError] = React.useState('')
     const handleOpen = () => setOpen(true)
     const handleClose = () => setOpen(false)
 
     async function handleButton() {
+        setError('')
         const response = await fetch('/apihandler', {
             method: 'POST'
         })
         if (!response.ok) {
-            console.error('data was not uploaded')
+            setError('There was an error with the server')
         } else {
             console.log(response.data)
         }
@@ -35,7 +37,10 @@ export default function Home() {
                     <h1 className='font-bold'>Canada Tekken 8 Leaderboard</h1>
                     {/*<LeaderBoardList data={} />*/}
                 </div>
-                <button onClick={handleButton}>Add Data</button>
+                <div>
+                    <button onClick={handleButton}>Add Data</button><br/>
+                    <span className='stroke-red-600 accent-red-600 font-bold'>{error}</span>
+                </div>
             </div>
         </div>
     );

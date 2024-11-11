@@ -1,17 +1,22 @@
-import * as Prisma from 'prisma'
+import { Pool } from 'pg'
+import { PrismaPg } from '@prisma/adapter-pg'
 import { PrismaClient } from '@prisma/client'
-import { queryPlayers } from '@/app/apihandler/startgg'
 
 /**
  * This method will be used to update the database using the start.gg and challonge API data
  */
+const connectionString = `${process.env.POSTGRES_CONNECTION_WORK}`
+const pool = new Pool({ connectionString })
+const adapter = new PrismaPg(pool)
 
 /**
  * This class will be used as an instance of the database that will store the
  * players database
  */
 export class Database {
-    prisma = new PrismaClient()
+
+    prisma = new PrismaClient({ adapter })
+
 
     /**
      * This method will be used to connect the instance of the object to the database
