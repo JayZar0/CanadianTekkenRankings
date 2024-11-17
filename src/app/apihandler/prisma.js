@@ -5,7 +5,7 @@ import { PrismaClient } from '@prisma/client'
 /**
  * This method will be used to update the database using the start.gg and challonge API data
  */
-const connectionString = `${process.env.POSTGRES_CONNECTION_WORK}`
+const connectionString = `${process.env.POSTGRES_CONNECTION_HOME}`
 const pool = new Pool({ connectionString })
 const adapter = new PrismaPg(pool)
 
@@ -41,7 +41,7 @@ export class Database {
                 }
             })
         } catch(e) {
-            console.error('error: data did not get added')
+            console.error('error: data did not get added', e.message)
         }
     }
 
