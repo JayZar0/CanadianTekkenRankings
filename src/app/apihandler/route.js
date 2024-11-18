@@ -1,6 +1,6 @@
 'use server'
-import * as StartggController from './startgg'
-import {Database} from "@/app/apihandler/prisma";
+import { queryPlayers } from './startgg'
+// import {Database} from "@/app/apihandler/prisma";
 import {NextResponse} from "next/server";
 
 /**
@@ -11,9 +11,11 @@ import {NextResponse} from "next/server";
  */
 export async function POST(req, res) {
     try {
-        const database = new Database()
-        await database.addData(req)
-        return NextResponse.json({data: 'data was uploaded'}, {status: 200})
+        // const database = new Database()
+        // await database.addData(req)
+        const response = await queryPlayers();
+        const data = await response.json()
+        return NextResponse.json({data: data}, {status: 200})
     } catch (e) {
         return NextResponse.json({data: 'There was an error in the server'}, {status: 400})
     }

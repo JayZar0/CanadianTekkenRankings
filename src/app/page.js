@@ -2,17 +2,19 @@
 
 import * as React from 'react'
 import FilterForm from '@/app/components/FilterForm'
-import LeaderBoardList from '@/app/components/LeaderBoardList'
+// import LeaderBoardList from '@/app/components/LeaderBoardList'
 import { Modal } from '@mui/material'
 
 export default function Home() {
     const [open, setOpen] = React.useState(false)
+    const [output, setOutput] = React.useState('')
     const [error, setError] = React.useState('')
     const handleOpen = () => setOpen(true)
     const handleClose = () => setOpen(false)
 
     async function handleButton() {
         setError('')
+        setOutput('')
         const response = await fetch('/apihandler', {
             method: 'POST'
         })
@@ -20,6 +22,7 @@ export default function Home() {
             setError('There was an error with the server')
         } else {
             console.log(response.data)
+            setOutput(response.data)
         }
     }
 
@@ -38,8 +41,11 @@ export default function Home() {
                     {/*<LeaderBoardList data={} />*/}
                 </div>
                 <div>
-                    <button onClick={handleButton}>Add Data</button><br/>
-                    <span className='stroke-red-600 accent-red-600 font-bold'>{error}</span>
+                    <button onClick={ handleButton }>Test data</button>
+                    {error}
+                </div>
+                <div>
+                    {output}
                 </div>
             </div>
         </div>
