@@ -21,7 +21,7 @@ export default function Home() {
         if (!response.ok) {
             setError('There was an error with the server')
         } else {
-            console.log(response.data)
+            console.log(response.data.nodes)
             setOutput(response.data)
         }
     }

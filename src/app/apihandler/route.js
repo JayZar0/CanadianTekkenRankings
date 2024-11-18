@@ -13,11 +13,12 @@ export async function POST(req, res) {
     try {
         // const database = new Database()
         // await database.addData(req)
-        const response = await queryPlayers();
-        const data = await response.json()
+        const response = await queryPlayers()
+        const data = response
+        console.log(data)
         return NextResponse.json({data: data}, {status: 200})
     } catch (e) {
-        return NextResponse.json({data: 'There was an error in the server'}, {status: 400})
+        return NextResponse.json({data: 'There was an error with the server'}, {status: 400})
     }
 
 }
