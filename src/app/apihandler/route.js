@@ -1,5 +1,5 @@
 'use server'
-import { queryPlayers } from './startgg'
+import {queryPlayers} from './startgg'
 // import {Database} from "@/app/apihandler/prisma";
 import {NextResponse} from "next/server";
 
@@ -13,9 +13,10 @@ export async function POST(req, res) {
     try {
         // const database = new Database()
         // await database.addData(req)
-        const response = await queryPlayers()
-        const data = response
-        console.log(data)
+        const data = (await queryPlayers())
+        for (const d of data) {
+            console.log(d)
+        }
         return NextResponse.json({data: data}, {status: 200})
     } catch (e) {
         return NextResponse.json({data: 'There was an error with the server'}, {status: 400})

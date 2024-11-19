@@ -1,26 +1,21 @@
 import * as React from 'react'
-import PropTypes from 'prop-types'
 
-export default function LeaderBoardList(props) {
-
-    props.data = PropTypes.array;
+export default function LeaderBoardList({ data }) {
 
     return (
-        <div>
+        <div className="h-96 w-72">
             <table>
                 <thead>
                     <tr>
                         <th>Name</th>
-                        <th>Average Placements</th>
-                        <th>Win Rate</th>
+                        <th>Placement</th>
                     </tr>
                 </thead>
-                <tbody>
-                    {props.data.map(d =>
-                        <tr key={d.id}>
+                <tbody className="text-center">
+                    {data.players.map(d =>
+                        <tr key={d.name}>
                             <td>{d.name}</td>
-                            <td>{d.averagePlacement}</td>
-                            <td>{d.winRate}</td>
+                            <td>{d.placement}</td>
                         </tr>
                     )}
                 </tbody>

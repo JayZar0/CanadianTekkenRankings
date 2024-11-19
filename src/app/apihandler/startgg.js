@@ -61,7 +61,7 @@ const queryString = `query TournamentFilter($cCode: String!, $prov: String!, $pe
  *      name
  */
 export async function queryPlayers() {
-    let results
+    let results = []
     try {
         const queryResponse = await fetch('https://api.start.gg/gql/alpha', {
             method: 'POST',
@@ -80,9 +80,18 @@ export async function queryPlayers() {
             })
         })
         const data = await queryResponse.json()
-        results = data.data.tournaments.nodes[1].events[0].entrants
-        // console.log(data.data.tournaments.nodes[1].events[0].entrants)
-        // console.log(data.data.tournaments.nodes[1].events[0].entrants.nodes[0].standing)
+        const tournaments = data.data.tournaments.nodes
+        for (const tournament of tournaments) {
+            results.push({
+                tournament: tournament.name,
+                players: tournament.events[0]?.entrants.nodes.map(e => {
+                    return {
+                        name: e.name,
+                        placement: e.standing.placement
+                    }
+                }).sort((a, b) => a.placement - b.placement)
+            })
+        }
     } catch(e) {
         console.error(e)
     }
