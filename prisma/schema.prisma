@@ -13,14 +13,12 @@ model Player {
   id          String  @id @default(cuid())
   startggid   String  @unique
   gamertag    String
-  main        String
-  province    String
   wins        Int
-  games       Int
+  totalPoints Int
   averageRank Decimal
-  winRate     Decimal
 }
 
 model Tournament {
-  id Int @id @default(autoincrement())
+  id   Int    @id @default(autoincrement())
+  name String
 }
