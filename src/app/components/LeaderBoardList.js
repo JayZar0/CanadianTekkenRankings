@@ -16,6 +16,8 @@ export default function LeaderBoardList({ data }) {
                         <tr>
                             <th>Name</th>
                             <th>Placement</th>
+                            <th>Wins</th>
+                            <th>Points</th>
                         </tr>
                         </thead>
                         <tbody className="text-center">
@@ -23,6 +25,8 @@ export default function LeaderBoardList({ data }) {
                             <tr key={d.name}>
                                 <td>{d.name}</td>
                                 <td>{d.placement}</td>
+                                <td>{d.wins}</td>
+                                <td>{d.points}</td>
                             </tr>
                         )}
                         </tbody>
