@@ -10,40 +10,40 @@ const queryString = `query TournamentFilter($cCode: String!, $prov: String!, $pe
                 tournaments(query: {
                     perPage: $perPage
                     filter: {
-                    addrState: $prov
-                    countryCode: $cCode
-                    venueName: "Travelodge Hotel"
+                        addrState: $prov
+                        countryCode: $cCode
+                        venueName: "Travelodge Hotel"
                     }
                 }){
                     nodes {
-                    id
-                    name
-                    countryCode
-                    addrState
-                    city
-                    events(limit: 10, filter: {
-                        videogameId: [49783]
-                    }) {
                         id
                         name
-                        videogame {
-                        id
-                        }
-                        entrants(query:{
-                        perPage: 25
-                        sortBy: "placement"
+                        countryCode
+                        addrState
+                        city
+                        events(limit: 10, filter: {
+                            videogameId: [49783]
                         }) {
-                        nodes {
+                            id
                             name
-                            standing {
-                            placement
-                            player {
+                            videogame {
                                 id
                             }
+                            entrants(query:{
+                                perPage: 25
+                                sortBy: "placement"
+                            }) {
+                                nodes {
+                                    name
+                                    standing {
+                                        placement
+                                        player {
+                                            id
+                                        }
+                                    }
+                                }
                             }
                         }
-                        }
-                    }
                     }
                 }
             }`
@@ -86,6 +86,7 @@ export async function queryPlayers() {
                 tournament: tournament.name,
                 players: tournament.events[0]?.entrants.nodes.map(e => {
                     return {
+                        id: e.standing.player?.id,
                         name: e.name,
                         placement: e.standing.placement
                     }
@@ -97,4 +98,11 @@ export async function queryPlayers() {
     }
     
     return results
+}
+
+/**
+ * This method will be used to calculate the stats of the players
+ */
+export async function calculateStats() {
+
 }

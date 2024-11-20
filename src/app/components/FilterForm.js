@@ -1,5 +1,7 @@
 'use client'
+
 import * as React from 'react'
+import {Modal} from "@mui/material";
 
 /**
  * This file is used to get a form for querying certain players
@@ -11,7 +13,10 @@ import * as React from 'react'
  * @constructor
  */
 export default function FilterForm() {
+    const [open, setOpen] = React.useState(false)
     const [inputs, setInputs] = React.useState([])
+    const handleOpen = () => setOpen(true)
+    const handleClose = () => setOpen(false)
 
     const characters = [
         {name: 'Alisa'},
@@ -58,43 +63,54 @@ export default function FilterForm() {
         }))
     }
 
-    async function submitHandler() {
-
+    async function submitHandler(e) {
+        e.preventDefault()
     }
 
     return (
-        <div className="block content-center justify-center self-center p-3 mx-auto my-3 w-60 h-96 bg-red-500 rounded">
-            <h1 className="m-2 font-bold">Enter details player</h1>
-            <form action="" onSubmit={submitHandler}>
-                <div className="row-auto m-2">
-                    <label htmlFor="name">Name: </label>
-                    <input className='text-black' type="text" name="player-name" id="name"
-                           placeholder="JuanZ0" onChange={setChange} />
+        <div>
+            <button type="button" className='bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded'
+                    onClick={handleOpen}>Filter Players
+            </button>
+            <Modal open={open} onClose={handleClose}>
+                <div className="block content-center justify-center self-center
+                p-3 mx-auto my-3 w-60 h-96 bg-red-500 rounded">
+                    <h1 className="m-2 font-bold">Enter details player</h1>
+                    <form action="" onSubmit={submitHandler}>
+                        <div className="row-auto m-2">
+                            <label htmlFor="name">Name: </label>
+                            <input className='text-black' type="text" name="player-name" id="name"
+                                   placeholder="JuanZ0" onChange={setChange}/>
+                        </div>
+                        <div className="row-auto m-2">
+                            <label htmlFor="province">Province: </label>
+                            <input className="text-black" type="text" name="province" id="province"
+                                   placeholder="Saskatchewan" onChange={setChange}/>
+                        </div>
+                        <div className="row-auto m-2">
+                            <label htmlFor="city">City: </label>
+                            <input className="text-black" type="text" name="city" id="city"
+                                   placeholder="Saskatoon" onChange={setChange}/>
+                        </div>
+                        <div className="row-auto m-2">
+                            <label htmlFor="character">Character: </label>
+                            <select className="text-black" name="character" id="character"
+                                    defaultValue="--Select a character--" onChange={setChange}>
+                                <option value="">--Select a character--</option>
+                                {characters.map(character =>
+                                    <option key={character.name} value={character.name}>{character.name}</option>
+                                )}
+                            </select>
+                        </div>
+                        <button className="bg-gray-500 hover:bg-gray-700 text-white font-bold m-2 py-2 px-4 rounded"
+                                type="submit">Search
+                        </button>
+                        <button className="bg-gray-500 hover:bg-gray-700 text-white font-bold m-2 py-2 px-4 rounded"
+                                type="button" onClick={handleClose}>Close
+                        </button>
+                    </form>
                 </div>
-                <div className="row-auto m-2">
-                    <label htmlFor="province">Province: </label>
-                    <input className="text-black" type="text" name="province" id="province"
-                           placeholder="Saskatchewan" onChange={setChange} />
-                </div>
-                <div className="row-auto m-2">
-                    <label htmlFor="city">City: </label>
-                    <input className="text-black" type="text" name="city" id="city"
-                           placeholder="Saskatoon" onChange={setChange} />
-                </div>
-                <div className="row-auto m-2">
-                    <label htmlFor="character">Character: </label>
-                    <select className="text-black" name="character" id="character"
-                            defaultValue="--Select a character--" onChange={setChange}>
-                        <option value="">--Select a character--</option>
-                        {characters.map(character =>
-                            <option key={character.name} value={character.name}>{character.name}</option>
-                        )}
-                    </select>
-                </div>
-                <button className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
-                        type="submit">Search
-                </button>
-            </form>
+            </Modal>
         </div>
     )
 }
