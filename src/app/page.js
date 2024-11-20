@@ -22,7 +22,7 @@ export default function Home() {
     }
 
     return (
-        <div className='grid h-screen bg-red-500 align-middle items-center justify-items-center p-8 sm:min-h-screen gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]'>
+        <div className='grid h-screen align-middle items-center justify-items-center p-8 sm:min-h-screen gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]'>
             <div className='flex flex-wrap'>
                 <div className='flex-1 grid-cols-2'>
                     <LeaderBoardList data={output} />
