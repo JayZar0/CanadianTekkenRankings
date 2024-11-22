@@ -87,6 +87,7 @@ export async function queryPlayers() {
         const tournaments = data.data.tournaments.nodes
         for (const tournament of tournaments) {
             queryResults.push({
+                id: tournament.id,
                 tournament: tournament.name,
                 players: tournament.events[0]?.entrants.nodes.map(e => {
                     return {

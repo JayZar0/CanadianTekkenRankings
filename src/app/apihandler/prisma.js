@@ -1,6 +1,7 @@
 import { Pool } from 'pg'
 import { PrismaPg } from '@prisma/adapter-pg'
 import { PrismaClient } from '@prisma/client'
+import { queryPlayers } from "@/app/apihandler/startgg";
 
 /**
  * This method will be used to update the database using the start.gg and challonge API data
@@ -17,32 +18,49 @@ export class Database {
 
     prisma = new PrismaClient({ adapter })
 
-
     /**
-     * This method will be used to connect the instance of the object to the database
+     * This method will be used to send data to the database
+     * @param data This is the data that was queried from the startgg api
+     * @returns {Promise<void>}
      */
-    async connectToDB() {
-        await this.prisma.$connect()
-    }
-
-    // TODO find a way to get this to add to the postgres database
-    async addData(playerData) {
+    async addData(data) {
         try {
-            const test = await this.prisma.Player.create({
+            // add all the players to the table
+            const players = await this.prisma.Player.createMany({
+                data: [ data.players ]
+            })
+
+            // add the tournament to the table
+            const tournaments = await this.prisma.Tournament.create({
                 data: {
-                    startggid: '1313',
-                    gamertag: 'juanZ0',
-                    main: 'Xiaoyu',
-                    province: 'Saskatchewan',
-                    wins: 24,
-                    games: 56,
-                    averageRank: 10.7,
-                    winRate: 42.9
+                    tournamentId: data.id,
+                    name: data.tournament
                 }
             })
+            console.log(players)
+            console.log(tournaments)
+
+            // disconnect the database
+            this.prisma.$disconnect()
         } catch(e) {
             console.error('error: data did not get added', e.message)
         }
+    }
+
+    /**
+     * This method will be used to query the database and print the data based
+     * on the params provided
+     * @param params This is the search param object
+     * @returns {Promise<json>}
+     */
+    async getPlayerData(params) {
+        const results = await this.prisma.Player.findMany({
+            where: {
+                params
+            }
+        })
+
+        return results.json()
     }
 
     /**
@@ -51,9 +69,13 @@ export class Database {
     async updateDatabase() {
         // query the api
         // grab the data from the query
-        // connect to the database
+        const data = await queryPlayers()
+
         // for each mapped piece of data
         // place it into the database
+        for (const d of data) {
+            await this.addData(d)
+        }
     }
 }
 

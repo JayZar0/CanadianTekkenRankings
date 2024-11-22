@@ -1,7 +1,7 @@
 'use server'
-import {queryPlayers} from './startgg'
-// import {Database} from "@/app/apihandler/prisma";
-import {NextResponse} from "next/server";
+import { queryPlayers } from './startgg'
+import { Database } from '@/app/apihandler/prisma'
+import { NextResponse } from "next/server";
 
 /**
  * This file will be used as a server handler which will be called on a filter
@@ -11,12 +11,12 @@ import {NextResponse} from "next/server";
  */
 export async function POST(req, res) {
     try {
-        // const database = new Database()
-        // await database.addData(req)
         const data = (await queryPlayers())
         for (const d of data) {
             console.log(d)
         }
+        const database = new Database()
+        await database.addData(data)
         return NextResponse.json({data: data}, {status: 200})
     } catch (e) {
         return NextResponse.json({data: 'There was an error with the server'}, {status: 400})
